@@ -54,6 +54,30 @@ round(Actual,2)
 #hp   -320.73  6721.16 4700.87 -16.45
 #drat    2.20   -47.06  -16.45   0.29
 ```
+## Another example
+
+```
+
+cov12<-cov(my_data[sample(nrow(my_data),20),c(1,2)])
+cov13<-cov(my_data[sample(nrow(my_data),20),c(1,3)])
+cov14<-cov(my_data[sample(nrow(my_data),20),c(1,4)])
+
+
+Combined<-CovComb(Klist=list(cov12,cov13,cov14))
+Actual<-cov(my_data)
+round(Combined,2)
+#         mpg     disp      hp   drat
+#mpg    41.11  -770.23 -347.78   2.66
+#disp -770.23 18253.89 5140.44 -48.71
+#hp   -347.78  5140.44 5233.73 -21.01
+#drat    2.66   -48.71  -21.01   0.30
+round(Actual,2)
+#         mpg     disp      hp   drat
+#mpg    36.32  -633.10 -320.73   2.20
+#disp -633.10 15360.80 6721.16 -47.06
+#hp   -320.73  6721.16 4700.87 -16.45
+#drat    2.20   -47.06  -16.45   0.29
+```
 
 
 

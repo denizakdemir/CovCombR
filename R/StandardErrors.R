@@ -22,7 +22,7 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
           name12<-strsplit(names1, "__..__")[2]  
           name21<-strsplit(names1, "__..__")[1]  
           name22<-strsplit(names1, "__..__")[2]  
-       nu* INFmat[names1,names2]<- Hmatinv[name11,name12]*Hmatinv[name21,name12]
+        INFmat[names1,names2]<- nu*Hmatinv[name11,name12]*Hmatinv[name21,name12]
         }
     }
     return(INFmat)
@@ -30,6 +30,8 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
     
     listout<-lapply(Klist, geterrorsonesample)
     outfunc <- Reduce("+", listout)
-    return(outfunc)
+    namesforerrormat<-apply(expand.grid(x=namesinH,y=namesinH),1,function(inp){paste(inp[1], inp[2],sep="_")})
+    rownames(outfunc)<-colnames(outfunc)<-namesforerrormat
+    return(solve(outfunc))
     
 }

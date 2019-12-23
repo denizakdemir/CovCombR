@@ -7,22 +7,25 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
     
     Hmatinv<-solve(Hmat)
     nrowe<-nrow(Hmat)^2
+    namesinH<-rownames(Hmat)
     
     geterrorsonesample<-function(K){
-    INFmat<-Matrix(0,nrowe,nrowe)
-    namesinH<-rownames(Hmat)
+    INFmat<-matrix(0,nrowe,nrowe)
     namesforerrormat<-apply(expand.grid(x=namesinH,y=namesinH),1,function(inp){paste(inp[1], inp[2],sep="_.._")})
     rownames(INFmat)<-colnames(INFmat)<-namesforerrormat
     namesinK<-rownames(K)
     namesforerrormatK<-apply(expand.grid(x=namesinK,y=namesinK),1,function(inp){paste(inp[1], inp[2],sep="_.._")})
     
-    for (names1 in namesforerrormatK){
-        for (names2 in namesforerrormatK){
-          name11<-strsplit(names1, "__..__")[1]  
-          name12<-strsplit(names1, "__..__")[2]  
-          name21<-strsplit(names1, "__..__")[1]  
-          name22<-strsplit(names1, "__..__")[2]  
-        INFmat[names1,names2]<- (nu/2)*Hmatinv[name11,name12]*Hmatinv[name21,name12]
+    
+    for (i in 1:(length(namesforerrormatK)-1)){
+        for (j in i:length(namesforerrormatK)){
+            
+            
+          name11<-strsplit(namesforerrormatK[i], "_.._")[[1]][1]  
+          name12<-strsplit(namesforerrormatK[i], "_.._")[[1]][2]  
+          name21<-strsplit(namesforerrormatK[j], "_.._")[[1]][1]  
+          name22<-strsplit(namesforerrormatK[j], "_.._")[[1]][2]  
+        INFmat[namesforerrormatK[i],namesforerrormatK[j]]<- (nu/2)*Hmatinv[name11,name12]*Hmatinv[name21,name22]
         }
     }
     return(INFmat)

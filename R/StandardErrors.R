@@ -22,7 +22,7 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
           name12<-strsplit(names1, "__..__")[2]  
           name21<-strsplit(names1, "__..__")[1]  
           name22<-strsplit(names1, "__..__")[2]  
-        INFmat[names1,names2]<- nu*Hmatinv[name11,name12]*Hmatinv[name21,name12]
+        INFmat[names1,names2]<- (nu/2)*Hmatinv[name11,name12]*Hmatinv[name21,name12]
         }
     }
     return(INFmat)

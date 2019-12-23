@@ -1,4 +1,4 @@
-loglikfunc <- function(Hmat, Klist, nu = 10000) {
+StandardErrors <- function(Hmat, Klist, nu = 10000) {
     
     loglik1 <- function(x) {
         

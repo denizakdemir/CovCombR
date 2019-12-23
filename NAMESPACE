@@ -1,4 +1,4 @@
-export("CovComb")
+export("CovComb", "StandardErrors")
 importFrom("CholWishart","dWishart")
 importFrom("Matrix","nearPD")
 importFrom("nlme","logDet","pdSymm")

@@ -1,4 +1,4 @@
-StandardErrors <- function(Hmat, Klist, nu = 10000) {
+StandardErrors <- function(Hmat, Klist, nu = 100) {
     
 #the information matrix is given by 
 #    \[ \{I(\Psi)\}_{jk,lh}=\{-E(\frac{\partial^2 l(\Psi)}{\partial \psi_{jk}\partial \psi_{lh}}|\Psi =\widehat{\Psi})\}_{jk,lh} 
@@ -14,6 +14,7 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
     namesforerrormat<-apply(expand.grid(x=namesinH,y=namesinH),1,function(inp){paste(inp[1], inp[2],sep="_.._")})
     rownames(INFmat)<-colnames(INFmat)<-namesforerrormat
     namesinK<-rownames(K)
+    m=length(Klist)
     
     for (i in 1:(length(namesforerrormat))){
         name11<-strsplit(namesforerrormat[i], "_.._")[[1]][1]  
@@ -31,7 +32,7 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
           rownames(mat2)<-colnames(mat2)<-namesinH
           mat2[name21, name22]<-1
           
-          INFmat[namesforerrormat[i],namesforerrormat[j]]<- (nu/2)*sum(diag(Hmatinv%*%mat1%*%Hmatinv%*%mat2))
+          INFmat[namesforerrormat[i],namesforerrormat[j]]<- (nu/(2))*sum(diag({Hmatinv*(nu*m)}%*%mat1%*%{Hmatinv*(nu*m)}%*%mat2))
         }
     }
     return(INFmat)
@@ -42,6 +43,7 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
     namesforerrormat<-apply(expand.grid(x=namesinH,y=namesinH),1,function(inp){paste(inp[1], inp[2],sep="_")})
     rownames(outfunc)<-colnames(outfunc)<-namesforerrormat
     outfunc<-outfunc[order(rownames(outfunc)),order(colnames(outfunc))]
-    return(sqrt(nu*solve(outfunc)))
-    
+    outfunc<-nu*sqrt(solve(outfunc))
+    return(outfunc[!duplicated(rownames(outfunc)),!duplicated(rownames(outfunc))])
 }
+

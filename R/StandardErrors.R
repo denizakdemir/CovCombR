@@ -41,8 +41,6 @@ StandardErrors <- function(Hmat, Klist, nu = 10000) {
     outfunc <- Reduce("+", listout)
     namesforerrormat<-apply(expand.grid(x=namesinH,y=namesinH),1,function(inp){paste(inp[1], inp[2],sep="_")})
     rownames(outfunc)<-colnames(outfunc)<-namesforerrormat
-    outfunc<-outfunc[rowSums(outfunc)>0,]
-    outfunc<-outfunc[,colSums(outfunc)>0]
     outfunc<-outfunc[order(rownames(outfunc)),order(colnames(outfunc))]
     return(sqrt(nu*solve(outfunc)))
     

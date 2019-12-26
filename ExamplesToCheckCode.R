@@ -51,21 +51,28 @@ repfunc2<-function(repi){
   
   library(CovCombR)
   outCovComb<-CovComb(CovList, nu=39)
-  
-  SEMAT<-StandardErrors(Hmat=outCovComb,Klist=CovList,nu=39)
-  seest1<-matrix(0,4,4)
-  seest1[,]<- 4*round(diag(SEMAT),3)
-  rownames(seest1)<-names(diag(SEMAT))[1:4]
-  colnames(seest1)<-names(diag(SEMAT))[1:4]
-  
-  return(seest1)
+  SEMAT<-StandardErrors(Hmat=outCovComb,Klist=CovList,nu=39,w=1)
+  return(SEMAT)
 }
 
 
 
 repfunc100<-simplify2array(lapply(1:1000,repfunc))
 repfunc2100<-simplify2array(lapply(1:1000,repfunc2))
+
+apply(repfunc100, c(1,2),sd)
+sqrt(matrix(apply(repfunc2100, c(1,2),mean),4,4))[c(1,4,3,2),c(1,4,3,2)]
+par(mfrow=c(1,2))
+
+image(apply(repfunc100, c(1,2),sd))
+image(sqrt(matrix(apply(repfunc2100, c(1,2),mean),4,4))[c(1,4,3,2),c(1,4,3,2)])
+
+round(sqrt(diag(repfunc2100[,,1])),4)
+apply(repfunc100, c(1,2),sd)
 par(mfrow=c(1,2))
 image(apply(repfunc100, c(1,2),sd))
-image(apply(repfunc2100, c(1,2),mean)[c(3,4,1,2),c(3,4,1,2)])
+image(sqrt(matrix(apply(repfunc2100, c(1,2),mean),4,4))[c(3,4,1,2),c(3,4,1,2)])
 
+hist(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean)))
+mean(na.omit(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean)))^2)
+mean(na.omit(abs(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean)))))

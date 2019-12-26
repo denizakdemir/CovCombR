@@ -51,7 +51,7 @@ repfunc2<-function(repi){
   
   library(CovCombR)
   outCovComb<-CovComb(CovList, nu=39)
-  SEMAT<-StandardErrors(Hmat=outCovComb,Klist=CovList,nu=39,w=1)
+  SEMAT<-GetVarCov(Hmat=outCovComb,Klist=CovList,nu=39,w=1)
   return(SEMAT)
 }
 

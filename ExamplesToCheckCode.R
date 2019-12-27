@@ -76,3 +76,24 @@ image(sqrt(matrix(apply(repfunc2100, c(1,2),mean),4,4))[c(3,4,1,2),c(3,4,1,2)])
 hist(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean)))
 mean(na.omit(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean)))^2)
 mean(na.omit(abs(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean)))))
+
+
+
+###################
+data("mtcars")
+my_data <- mtcars[, c(1,3,4,5)]
+dim(my_data)
+# print the first few rows
+head(my_data)
+#ArtificiaLly making 3 partial covariance matrices! 
+#These are the partial covariances obtained from 
+#independent  multi-view experiments.
+set.seed(123)
+cov12<-cov(my_data[sample(nrow(my_data),20),1:2])
+cov23<-cov(my_data[sample(nrow(my_data),20),2:3])
+cov34<-cov(my_data[sample(nrow(my_data),20),3:4])
+
+# Combine covariances using the package
+Combined<-CovComb(Klist=list(cov12,cov23,cov34))
+SEMAT<-GetVarCov(Hmat=Combined,Klist=list(cov12,cov23,cov34),nu=20,w=1)
+round(sqrt(diag(SEMAT)),3)

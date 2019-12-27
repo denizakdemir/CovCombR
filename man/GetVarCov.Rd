@@ -59,7 +59,7 @@ SEMAT<-GetVarCov(Hmat=Combined,
 ## the asymptotic standard errors. 
 round(sqrt(diag(SEMAT)),3)
 }
-}
+
 
 \keyword{multivariate}
 \keyword{models}

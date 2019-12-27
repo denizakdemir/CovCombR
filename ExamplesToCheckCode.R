@@ -80,6 +80,7 @@ mean(na.omit(abs(c(apply(repfunc100, c(1,2),sd)-apply(repfunc2100, c(1,2),mean))
 
 
 ###################
+
 data("mtcars")
 my_data <- mtcars[, c(1,3,4,5)]
 dim(my_data)

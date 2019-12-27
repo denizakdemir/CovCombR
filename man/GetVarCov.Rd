@@ -35,7 +35,6 @@ Asymptotic sampling covariance matrix for the combined covariance estimate. The 
 \email{deniz.akdemir.work@gmail.com}
 }
 
-
 \examples{
 data("mtcars")
 my_data <- mtcars[, c(1,3,4,5)]
@@ -54,12 +53,11 @@ cov34<-cov(my_data[sample(nrow(my_data),20),3:4])
 Combined<-CovComb(Klist=list(cov12,cov23,cov34))
 # Get asyptotic sampling variance- covariance matrix.  
 SEMAT<-GetVarCov(Hmat=Combined,
-    Klist=list(cov12,cov23,cov34),nu=20,w=1)
+Klist=list(cov12,cov23,cov34),nu=20,w=1)
 ## Square root of the diagonal elements are 
 ## the asymptotic standard errors. 
 round(sqrt(diag(SEMAT)),3)
 }
-
 
 \keyword{multivariate}
 \keyword{models}

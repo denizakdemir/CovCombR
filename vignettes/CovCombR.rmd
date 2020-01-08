@@ -1,6 +1,6 @@
 ---
 title: "Combining partial covariance matrices using CovCombR package"
-author: "Deniz Akdemir and Julio Isidro Sanchez"
+author: "Deniz Akdemir, Mohamed Somo, Julio Isidro Sanchez"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >

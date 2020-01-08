@@ -1,9 +1,9 @@
 Package: CovCombR
 Type: Package
-Title: Combine Partial Covariance/Relationship Matrices
+Title: Combine Partial Covariance / Relationship Matrices
 Version: 1.0
-Date: 2019-12-13
-Author: Deniz Akdemir and Julio Isidro Sanchez
+Date: 2020-01-08
+Author: Deniz Akdemir, Mohamed Somo, Julio Isidro Sanchez
 Maintainer: Deniz Akdemir <deniz.akdemir.work@gmail.com>
 Description: Combine partial covariance matrices using a Wishart-EM algorithm. 
     Methods are described in the November 2019 article by Akdemir et al. 

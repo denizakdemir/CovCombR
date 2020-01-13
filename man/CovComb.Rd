@@ -106,8 +106,7 @@ cov2cor(outCovComb)
 cov2cor(cov(iris[101:150,1:4]))
 
 ####Here is a simple plot for visual comparison.
-par0<-par()
-par(mfrow=c(1,2))
+
 image(cov2cor(outCovComb),xlab="", ylab="", axes = FALSE, main="Combined")
 axis(1, at = seq(0, 1, length=4),labels=rownames(outCovComb), las=2)
 axis(2, at = seq(0, 1, length=4),labels=rownames(outCovComb), las=2)
@@ -115,7 +114,6 @@ image(cov2cor(cov(iris[101:150,1:4])),xlab="", ylab="", axes = FALSE,
 main="All Data")
 axis(1, at = seq(0, 1, length=4),labels=colnames(iris[,1:4]), las=2)
 axis(2, at = seq(0, 1, length=4),labels=colnames(iris[,1:4]), las=2)
-par0
 
 \donttest{
 
